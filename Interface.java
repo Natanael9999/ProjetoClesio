@@ -26,23 +26,11 @@
 
 // Questão 6, adicione na interface
         
-        Arvore arvore = new Arvore();
+        Arvore<Senha> arvore = new Arvore<Senha>();
         
-        Lista lista2 = new Lista();
+        arvore.adicionar(new Senha("Nubank", "1234"));
         
-        while (iterador.hasNext()) 
-        {
-            Senha u = iterador.next();
-            
-            String senha = u.getSenha();
-            
-            arvore.adicionar(senha);
-            
-            if(arvore.adicionar(senha) == false)
-            {
-                lista2.insere(senha);
-            }
-        }
+        arvore.adicionar(new Senha("Will", "1234"));
         
         System.out.println(arvore.preOrdem(arvore.getRaiz()));
         
