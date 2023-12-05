@@ -25,15 +25,33 @@
         System.out.println(mapa);
 
 // Questão 6, adicione na interface
+
+        Iterator<Senha> iterador2 = lista.iterator();
         
-        Arvore<Senha> arvore = new Arvore<Senha>();
+        Arvore arvore = new Arvore();
         
-        arvore.adicionar(new Senha("Nubank", "1234"));
+        Lista lista2 = new Lista();
         
-        arvore.adicionar(new Senha("Will", "1234"));
+
+        while (iterador2.hasNext()) 
+        {
+            Senha u = iterador2.next();
+            
+            if(arvore.adicionar(u) == true)
+            {
+                
+            }
+            
+            else
+            {
+                lista2.insere(u);
+            }
+        }
         
         System.out.println(arvore.preOrdem(arvore.getRaiz()));
         
         System.out.println(arvore.emOrdem(arvore.getRaiz()));
         
         System.out.println(arvore.posOrdem(arvore.getRaiz()));
+        
+        System.out.println(lista2.toString());
