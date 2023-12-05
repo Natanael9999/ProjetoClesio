@@ -1,8 +1,10 @@
 package Classe;
 
-public class Arvore<T extends Comparable> {
+public class Arvore<TIPO extends Comparable> {
     
-    private Elemento<T> raiz;
+    private Elemento<TIPO> raiz;
+    
+    Lista lista2 = new Lista();
     
     public Arvore()
     {
@@ -10,19 +12,19 @@ public class Arvore<T extends Comparable> {
     }
     
     
-    public Elemento<T> getRaiz()
+    public Elemento<TIPO> getRaiz()
     {
         return raiz;
     }
     
-    public void setRaiz(Elemento<T> r)
+    public void setRaiz(Elemento<TIPO> r)
     {
         this.raiz = r;
     }
     
-    public boolean adicionar(T valor)
+    public boolean adicionar(TIPO valor)
     {
-        Elemento<T> novoElemento = new Elemento<T>(valor);
+        Elemento<TIPO> novoElemento = new Elemento<TIPO>(valor);
         
         if(raiz == null)
         {
@@ -33,12 +35,20 @@ public class Arvore<T extends Comparable> {
         
         else
         {
-            Elemento<T> atual = this.raiz;
+            Elemento<TIPO> atual = this.raiz;
             
             while(true)
             {
-                switch (novoElemento.getValor().compareTo(atual.getValor())) {
-                    case -1:
+                
+                if ((novoElemento.getValor().compareTo(atual.getValor()) < 0))
+                {
+                    if((novoElemento.getValor().equals(atual.getValor())))
+                    {
+                        return false;
+                    }
+                    
+                    else
+                    {
                         if(atual.getEsquerda() != null)
                         {
                             atual = atual.getEsquerda();
@@ -47,10 +57,20 @@ public class Arvore<T extends Comparable> {
                         else
                         {
                             atual.setEsquerda(novoElemento);
-                            
+                        
                             return true;
-                        }   break;
-                    case 1:
+                        }
+                    }
+                }
+                
+                else
+                {
+                    if((novoElemento.getValor().equals(atual.getValor())))
+                    {
+                        return false;
+                    }
+                    
+                    else{
                         if (atual.getDireita() != null)
                         {
                             atual = atual.getDireita();
@@ -59,17 +79,16 @@ public class Arvore<T extends Comparable> {
                         else
                         {
                             atual.setDireita(novoElemento);
-                            
+                        
                             return true;
-                        }   break;
-                    default:
-                        return false;
+                        }
+                    }
                 }
             }
         }
     }
     
-    public String emOrdem(Elemento<T> atual)
+    public String emOrdem(Elemento<TIPO> atual)
     {
         if(atual != null)
         {
@@ -82,7 +101,7 @@ public class Arvore<T extends Comparable> {
         }
     }
     
-    public String preOrdem(Elemento<T> atual)
+    public String preOrdem(Elemento<TIPO> atual)
     {
         if(atual != null)
         {
@@ -95,7 +114,7 @@ public class Arvore<T extends Comparable> {
         }
     }
     
-    public String posOrdem(Elemento<T> atual)
+    public String posOrdem(Elemento<TIPO> atual)
     {
         if(atual != null)
         {
@@ -108,11 +127,11 @@ public class Arvore<T extends Comparable> {
         }
     }
     
-    public boolean remover(T valor){
+    public boolean remover(TIPO valor){
         
-        Elemento<T> atual = this.raiz;
+        Elemento<TIPO> atual = this.raiz;
         
-        Elemento<T> paiAtual = null;
+        Elemento<TIPO> paiAtual = null;
         
         while(atual != null){
             
@@ -138,15 +157,15 @@ public class Arvore<T extends Comparable> {
         
         if (atual != null)
         {
-            Elemento<T> removeEle = atual;
+            Elemento<TIPO> removeEle = atual;
             
-            Elemento<T> removePai = paiAtual; 
+            Elemento<TIPO> removePai = paiAtual; 
             
             if (removeEle.getDireita() != null){
                 
-                Elemento<T> substituto = removeEle.getDireita();
+                Elemento<TIPO> substituto = removeEle.getDireita();
                 
-                Elemento<T> paiSubstituto = removeEle;
+                Elemento<TIPO> paiSubstituto = removeEle;
                 
                 char paiFoi = 'D';                  
                 
@@ -187,9 +206,9 @@ public class Arvore<T extends Comparable> {
             
             else if (removeEle.getEsquerda() != null){ 
                 
-                Elemento<T> substituto = removeEle.getEsquerda();
+                Elemento<TIPO> substituto = removeEle.getEsquerda();
                 
-                Elemento<T> paiSubstituto = removeEle;
+                Elemento<TIPO> paiSubstituto = removeEle;
                 
                 char paiFoi = 'E';
                 
